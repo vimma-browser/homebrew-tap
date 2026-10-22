@@ -4,6 +4,7 @@ cask "vimma" do
 
   url "https://github.com/vimma-browser/vimma/releases/download/v#{version}/vimma-#{version}-macos-aarch64.dmg"
   name "Vimma"
+  desc "Keyboard-first web browser built on Firefox"
   homepage "https://github.com/vimma-browser/vimma"
 
   livecheck do
