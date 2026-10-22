@@ -11,4 +11,5 @@ the signed release and pushed here by `homebrew.yml`; change it in
 [vimma-browser/vimma](https://github.com/vimma-browser/vimma), not here.
 
 `.github/workflows/check.yml` runs `brew style` and an offline `brew audit --cask --strict` on
-every pull request and every push to `main`, the same checks Vimma's own CI runs on the cask.
+every pull request and every push to `main`: the checks Vimma's own CI runs on the cask, on the
+latest stable Homebrew.

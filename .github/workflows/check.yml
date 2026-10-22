@@ -1,6 +1,8 @@
 # Checks every cask in this tap as Homebrew reads it: `brew style` and an offline
 # `brew audit --cask --strict`, the same checks Vimma's own CI runs on the generated cask
-# (vimma-browser/vimma, tools/package/cask-check.sh), so the two cannot disagree.
+# (vimma-browser/vimma, tools/package/cask-check.sh), but on the latest stable Homebrew and the
+# whole tap: cask-check.sh runs the runner image's Homebrew on the one cask, so a new Homebrew
+# audit rule can turn this red before Vimma's cask job.
 # The audit stays offline: --online would download the dmg and query GitHub and the homepage, so
 # a network failure would fail the tap with no cask change, and the release workflow already
 # installs the dmg through the cask before it publishes anything.
