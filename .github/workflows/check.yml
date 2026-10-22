@@ -1,0 +1,53 @@
+# Checks every cask in this tap as Homebrew reads it: `brew style` and an offline
+# `brew audit --cask --strict`, the same checks Vimma's own CI runs on the generated cask
+# (vimma-browser/vimma, tools/package/cask-check.sh), so the two cannot disagree.
+# The audit stays offline: --online would download the dmg and query GitHub and the homepage, so
+# a network failure would fail the tap with no cask change, and the release workflow already
+# installs the dmg through the cask before it publishes anything.
+# Runs on pull requests and on pushes to main, including the release workflow's push of
+# Casks/vimma.rb. It is not a required check: the push lands first, and a failure here reports
+# a cask to fix in vimma-browser/vimma, which generates it.
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  brew:
+    name: brew style and brew audit
+    # macOS, as Vimma's own cask checks: the cask is for macOS only.
+    runs-on: macos-15
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      # Fetches this repository into Homebrew's Taps directory itself (no actions/checkout), and
+      # trusts it. stable: the latest Homebrew release, as users run, not Homebrew's main branch.
+      # brew-gh-api-token empty: the offline checks call no GitHub API, so brew gets no token.
+      - name: Set up Homebrew
+        id: brew
+        uses: Homebrew/actions/setup-homebrew@eb02c69dbabdb66ff183c614f4ce7ab3c077592c # 2026.10.12.1
+        with:
+          stable: true
+          brew-gh-api-token: ""
+
+      - name: brew style
+        env:
+          TAP: ${{ steps.brew.outputs.tap-name }}
+        run: |
+          brew --version
+          brew style "$TAP"
+
+      - name: brew audit --cask --strict
+        env:
+          TAP: ${{ steps.brew.outputs.tap-name }}
+        run: brew audit --cask --strict --tap "$TAP"
