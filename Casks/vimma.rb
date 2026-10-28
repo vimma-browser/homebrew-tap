@@ -1,6 +1,6 @@
 cask "vimma" do
-  version "0.1.8"
-  sha256 "b5a44d78dc696a3205ebfea7a4363a5414b19879a8dc6b2ad72c923fd10ca637"
+  version "0.1.10"
+  sha256 "2d44097639217d1687bccb0f5323753e1b06250c7478d0ae7f99ffa50b9e89aa"
 
   url "https://github.com/vimma-browser/vimma/releases/download/v#{version}/vimma-#{version}-macos-aarch64.dmg"
   name "Vimma"
@@ -17,6 +17,7 @@ cask "vimma" do
 
   app "Vimma.app"
   binary "#{appdir}/Vimma.app/Contents/MacOS/vimma"
+  binary "#{appdir}/Vimma.app/Contents/MacOS/vimma-ctl"
 
   uninstall quit: "dev.vimma.browser"
 
