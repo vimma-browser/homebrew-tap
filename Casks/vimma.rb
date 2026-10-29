@@ -1,6 +1,6 @@
 cask "vimma" do
-  version "0.1.10"
-  sha256 "2d44097639217d1687bccb0f5323753e1b06250c7478d0ae7f99ffa50b9e89aa"
+  version "0.1.11"
+  sha256 "ec8bbe15f5db568ba35c9e9b77fcdb3ad79d48b684cf1ac153ae3a5380fe80e8"
 
   url "https://github.com/vimma-browser/vimma/releases/download/v#{version}/vimma-#{version}-macos-aarch64.dmg"
   name "Vimma"
@@ -27,10 +27,4 @@ cask "vimma" do
     "~/Library/Preferences/dev.vimma.browser.plist",
     "~/Library/Saved Application State/dev.vimma.browser.savedState",
   ]
-
-  caveats <<~EOS
-    Vimma is not notarised by Apple yet, so macOS will not open it the first time.
-    Open it once, then go to System Settings → Privacy & Security, choose
-    Open Anyway next to Vimma, and confirm. macOS may ask again after an upgrade.
-  EOS
 end
