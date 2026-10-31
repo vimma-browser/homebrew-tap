@@ -1,6 +1,6 @@
 cask "vimma" do
-  version "0.1.11"
-  sha256 "ec8bbe15f5db568ba35c9e9b77fcdb3ad79d48b684cf1ac153ae3a5380fe80e8"
+  version "0.1.13"
+  sha256 "a9cf1159b536f3c0c00258ba204472c09dc8989e115aa18a5351c4900f9b032a"
 
   url "https://github.com/vimma-browser/vimma/releases/download/v#{version}/vimma-#{version}-macos-aarch64.dmg"
   name "Vimma"
